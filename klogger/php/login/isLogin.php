@@ -1,0 +1,1 @@
+<?php    if (!isset($_SESSION)) {        session_start();    }    $dirP = "../../index.php";    if (!isset($_SESSION["ID_USER"]) || !isset($_SESSION["USER"]) ||            !isset($_SESSION["SESION"]) ) {        header("Location: $dirP");        exit();    }?>
