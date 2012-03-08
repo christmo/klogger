@@ -26,11 +26,11 @@ function agregarTab(tipoReporte,est){
         crearGrafica(1), crearGrafica(2), 
         crearGrafica(3),crearGrafica(4), 
         crearGrafica(5),crearGrafica(6)
-//        ,{
-//            title: 'More Column Spanning',
-//            html: '<p>Spanning three columns.</p>',
-//            colspan: 2
-//        }
+        //        ,{
+        //            title: 'More Column Spanning',
+        //            html: '<p>Spanning three columns.</p>',
+        //            colspan: 2
+        //        }
         ]
     });
 
@@ -64,7 +64,7 @@ function actualizarGraficas(){
     setTimeout( function(){
         actualizarGraficas();
     }
-    , 2*1000);
+    , 1*1000);
 }
 
 function actualizarStoresGraficas(id_var){
@@ -241,44 +241,69 @@ function getIconEntrada6(obj){
 }
 function getIconSalida1(obj){
     if(obj.dou1==1){
-        return iconVerde;
+        return "<img id='out1' src='./img/lv.png' alt='activo' onClick='changeImage(id);'>";
     }else{
-        return iconRojo;
+        return "<img id='out1' src='./img/lr.png' alt='inactivo' onClick='changeImage(id);'>";
     }
 }
 function getIconSalida2(obj){
     if(obj.dou2==1){
-        return iconVerde;
+        return "<img id='out2' src='./img/lv.png' alt='activo' onClick='changeImage(id);'>";
     }else{
-        return iconRojo;
+        return "<img id='out2' src='./img/lr.png' alt='inactivo' onClick='changeImage(id);'>";
     }
 }
 function getIconSalida3(obj){
     if(obj.dou3==1){
-        return iconVerde;
+        return "<img id='out3' src='./img/lv.png' alt='activo' onClick='changeImage(id);'>";
     }else{
-        return iconRojo;
+        return "<img id='out3' src='./img/lr.png' alt='inactivo' onClick='changeImage(id);'>";
     }
 }
 function getIconSalida4(obj){
     if(obj.dou4==1){
-        return iconVerde;
+        return "<img id='out4' src='./img/lv.png' alt='activo' onClick='changeImage(id);'>";
     }else{
-        return iconRojo;
+        return "<img id='out4' src='./img/lr.png' alt='inactivo' onClick='changeImage(id);'>";
     }
 }
 function getIconSalida5(obj){
     if(obj.dou5==1){
-        return iconVerde;
+        return "<img id='out5' src='./img/lv.png' alt='activo' onClick='changeImage(id);'>";
     }else{
-        return iconRojo;
+        return "<img id='out5' src='./img/lr.png' alt='inactivo' onClick='changeImage(id);'>";
     }
 }
 function getIconSalida6(obj){
     if(obj.dou6==1){
-        return iconVerde;
+        return "<img id='out6' src='./img/lv.png' alt='activo' onClick='changeImage(id);'>";
     }else{
-        return iconRojo;
+        return "<img id='out6' src='./img/lr.png' alt='inactivo' onClick='changeImage(id);'>";
     }
 }
 
+function changeImage(id){
+    var img = Ext.get(id);
+    var ac;
+    if(img.dom.alt=="activo"){
+        ac=0;
+    }else{
+        ac=1;
+    }
+  
+    $.ajax({
+        url : 'php/monitoreo/setSalidaUltimosDatos.php',
+        type : 'GET',
+        async : true,
+        data: "ac="+ac+"&id_var="+id.substr(3)+"&id_est="+id_est,
+        success : function( datos ){
+            var r = eval('(' + datos + ')');
+            if(r.ac==0){
+                img.dom.src = './img/lr.png';
+            }else{
+                img.dom.src = './img/lv.png';
+            }
+            
+        }
+    });    
+}
