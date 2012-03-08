@@ -64,7 +64,7 @@ function actualizarGraficas(){
     setTimeout( function(){
         actualizarGraficas();
     }
-    , 1*1000);
+    , 30*1000);
 }
 
 function actualizarStoresGraficas(id_var){
@@ -290,7 +290,6 @@ function changeImage(id){
     }else{
         ac=1;
     }
-  
     $.ajax({
         url : 'php/monitoreo/setSalidaUltimosDatos.php',
         type : 'GET',
@@ -300,10 +299,14 @@ function changeImage(id){
             var r = eval('(' + datos + ')');
             if(r.ac==0){
                 img.dom.src = './img/lr.png';
+                img.dom.alt = 'inactivo';
             }else{
                 img.dom.src = './img/lv.png';
-            }
-            
+                img.dom.alt = 'activo';
+            }           
+        },
+        error:function(datos){
+            Ext.Msg.alert('Error...','No se pudo enviar el comando intentar nuevamente...'); 
         }
     });    
 }
