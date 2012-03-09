@@ -1,10 +1,12 @@
 <?php
-
 require_once('../../dll/conect.php');
+session_start();
 cerrarConexion();
 session_destroy();
 
-include "../login/isLogin.php";
+echo '<script type="text/javascript">';
+echo "window.location='../../index.php';";
+echo '</script>';
 
 ?>
 
