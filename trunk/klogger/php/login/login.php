@@ -11,17 +11,11 @@ $consultaSql = " SELECT ID_US, USER_US, PASS_US FROM " .
         " USUARIOS WHERE USER_US = '" . $us .
         "' AND PASS_US = '" . $encriptClave . "'";
 
-echo $consultaSql;
-
-
 consulta($consultaSql);
 $registro = unicaFila();
 
-session_start();
-//$_SESSION["INI"] = 'http://200.0.29.117:8080/karview/';
-
 if ($registro["PASS_US"] == $encriptClave && $registro["USER_US"] == $us) {
-
+    session_start();
     $_SESSION["USER"] = $registro["USER_US"];
     $_SESSION["ID_USER"] = $registro["ID_US"];
     $_SESSION["SESION"] = true;

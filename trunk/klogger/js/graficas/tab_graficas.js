@@ -290,20 +290,41 @@ function changeImage(id){
     }else{
         ac=1;
     }
+    if(ac==0){
+        img.dom.src = './img/lr.png';
+        img.dom.alt = 'inactivo';
+    }else{
+        img.dom.src = './img/lv.png';
+        img.dom.alt = 'activo';
+    } 
+    
+    var codBinario=1;
+    var suma=0;
+    for(var i=1; i<=6; i++){
+        var out = Ext.get("out"+i).dom.alt;
+        codBinario = codBinario*2;
+        if(i==1){
+            codBinario--;    
+        }
+        if(out=='activo'){
+            suma += codBinario
+        }
+    }
+    var txtSuma = ""+suma;
+    if(txtSuma.length==1){
+        txtSuma = "00"+txtSuma;
+    }else if(txtSuma.length==2){
+        txtSuma = "0"+txtSuma;
+    }
+    
     $.ajax({
         url : 'php/monitoreo/setSalidaUltimosDatos.php',
         type : 'GET',
         async : true,
-        data: "ac="+ac+"&id_var="+id.substr(3)+"&id_est="+id_est,
+        data: "ac="+ac+"&id_var="+id.substr(3)+"&id_est="+id_est+"&bin="+txtSuma,
         success : function( datos ){
             var r = eval('(' + datos + ')');
-            if(r.ac==0){
-                img.dom.src = './img/lr.png';
-                img.dom.alt = 'inactivo';
-            }else{
-                img.dom.src = './img/lv.png';
-                img.dom.alt = 'activo';
-            }           
+            console.info("Guardado:"+r.success);          
         },
         error:function(datos){
             Ext.Msg.alert('Error...','No se pudo enviar el comando intentar nuevamente...'); 
