@@ -70,15 +70,13 @@ Ext.onReady(function(){
                                 });
                             },
                             success: function (form, action) {
-                            //                                var resultado = Ext.util.JSON.decode(action.response.responseText);
-                            //                                /**
-                            //                                 *Guardar el tipo de recorrido seleccionado para poner el 
-                            //                                 *icono de inicio o fin de la nueva ruta
-                            //                                 */
-                            //                                strTipoRecorrido=rbTipoRecorrido;
-                            //                                limpiarVentana();
-                            //                                console.info('R:'+resultado);
-                            //                                ventanaHorasRuta(resultado,false);
+                                winConfiguraciones.hide();
+                                Ext.MessageBox.show({
+                                    title   : 'Exito...',
+                                    msg     : 'Configuraci\xF3n realizada con \xE9xito...',
+                                    buttons : Ext.MessageBox.OK,
+                                    icon    : Ext.MessageBox.INFO
+                                });
                             }
                         });  
                     }else{
@@ -119,22 +117,7 @@ function limpiarVentana(){
 }
 
 /**
-* Hace el cargado del combo box con un nuevo tipo de recorrido para que se
-* carguen las rutas de este.
-*/
-function recargarCbxNuevaRuta(panelRuta){
-    rbTipoRecorrido =  panelRuta.getForm().getValues()['rbTipo'];
-//    cbxNuevaRuta.reset();
-//    if(typeof rbTipoRecorrido!='undefined'){
-//        urlNuevaRuta = phpComboRutas +"?op="+ rbTipoRecorrido;
-//        storeCbxNuevaRuta.proxy.conn.url = urlNuevaRuta;
-//        storeCbxNuevaRuta.load();
-//    }
-}
-
-
-/**
- * Muestra la ventana para ingresar una nueva ruta
+ * Muestra la ventana para CONFIGURAR EL TIEMPO DE REPORTE
  * @return NO retorna valor
  */
 function ventanaConfiguracion(id_estacion){
