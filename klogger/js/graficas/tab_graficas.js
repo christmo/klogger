@@ -26,11 +26,6 @@ function agregarTab(tipoReporte,est){
         crearGrafica(1), crearGrafica(2), 
         crearGrafica(3),crearGrafica(4), 
         crearGrafica(5),crearGrafica(6)
-        //        ,{
-        //            title: 'More Column Spanning',
-        //            html: '<p>Spanning three columns.</p>',
-        //            colspan: 2
-        //        }
         ]
     });
 
@@ -108,7 +103,7 @@ function crearGrafica(id_var){
         autoLoad    : true,
         storeId          : 'store'+id_var,
         name        : 'str'+id_var,
-        url         : './php/monitoreo/graficas/getMediciones.php?id_var='+id_var,
+        url         : './php/monitoreo/graficas/getMediciones.php?id_var='+id_var+'&id_est='+id_est,
         root        : 'serie',
         fields      : ['time', 'value'],
         failure: function (form, action) {

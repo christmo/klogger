@@ -62,12 +62,12 @@ echo " var styleLienzo = new OpenLayers.StyleMap( {
         graphicHeight : '\${hg}',
         fillOpacity : 0.85,
 
-        id_est : '\${id_est}',
-        fec_inst : '\${fec_inst}',
-        resp : '\${resp}',
-        contacto : '\${contacto}',
+        id_est  : '\${id_est}',
+        fec_inst: '\${fec_inst}',
+        resp    : '\${resp}',
+        contacto: '\${contacto}',
         dir_est : '\${dir_est}',
-        nomb_est : '\${nomb_est}',
+        nomb_est: '\${nomb_est}',
        
         label : '..\${nomb_est}',
         fontColor: '\${favColor}',
@@ -389,7 +389,7 @@ function graficarVehiculos2(cordGrap){
                 hg: 48,
                 id_est   : columnas[0],
                 fec_inst : columnas[3],
-                resp : columnas[4],
+                resp     : columnas[4],
                 contacto : columnas[5],
                 nomb_est : columnas[6],
                 dir_est : columnas[7],
@@ -744,7 +744,7 @@ function onVehiculoSelect( feature ) {
             + nomb_est + '</div><b><BR/> Dirección:  </b> <div style=\'padding:0px 0px 0px 15px\'>'
             + dir_est + '</div><b><BR/> Responsable: </b> <div style=\'padding:0px 0px 0px 15px\'>'
             + resp + '</div><b> <BR/> Contacto: </b> '
-            + contacto + ' <b> <BR/> Fecha Inst: </b> <div style=\'padding:0px 0px 0px 15px\'>' + fec_inst +  '</div><b></b></div>'
+            + contacto + ' <b> <BR/> Fecha Inst: </b> <div style=\'padding:0px 0px 0px 15px\'>' + fec_inst +  '</div><br/><center><b><a href=\"javascript:agregarTab(\'Tiempo Real\','+id_est+');\">".utf8_encode("Ver Gr\xE1ficos")."</a></b></center></div>'
         ,
         null, true,  function () {
             onVehiculoClose( feature )

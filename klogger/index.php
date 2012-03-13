@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>KRADAC - Rastreo Satelital</title>
+        <title>KRADAC - Medición Remota</title>
         <link rel="shortcut icon" href="img/k.png" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/css_index.css"/>
 
