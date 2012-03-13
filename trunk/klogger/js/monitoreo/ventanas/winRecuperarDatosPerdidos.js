@@ -10,7 +10,7 @@ var formRecuperarDatosPerdidos;
 
 Ext.onReady(function(){
 
-    var storeEstaciones = new Ext.data.JsonStore({
+    var storeEstacionesRD = new Ext.data.JsonStore({
         url:'php/monitoreo/combos/cbxEstaciones.php',
         root: 'estaciones',
         fields: [{
@@ -19,13 +19,13 @@ Ext.onReady(function(){
             name:'name'
         }]
     });
-    storeEstaciones.load();
+    storeEstacionesRD.load();
     
     var cbxEstacionesRD = new Ext.form.ComboBox({
         fieldLabel  : 'Estaciones',
         id          : 'cbxRecuperarDatos',
         name        : 'cbxRecuperarDatos',
-        store       : storeEstaciones,
+        store       : storeEstacionesRD,
         hiddenName  : 'idEstacion',
         valueField  : 'id',
         displayField: 'name',
@@ -41,11 +41,11 @@ Ext.onReady(function(){
         anchor      : '98%'
     });
     
-    var fecha = new Ext.form.DateField({
+    var fechaRD = new Ext.form.DateField({
         fieldLabel  : 'Recuperar datos de',
         xtype       : 'datefield',
         format      : 'ymd',//Fecha en formato 120307
-        id          : 'fechaInstalacion',
+        id          : 'fechaRD',
         name        : 'fechaRecuperar',
         width       : 140,
         allowBlank  : false,
@@ -64,7 +64,7 @@ Ext.onReady(function(){
             defaultType: 'textfield',
             items: [
             cbxEstacionesRD,
-            fecha
+            fechaRD
             ]
         }],
 
@@ -72,33 +72,9 @@ Ext.onReady(function(){
             text    : 'Recuperar Datos',
             id      : 'btnRecuperarDatos',
             handler: function() {
-                
-                formRecuperarDatosPerdidos.getForm().submit({
-                    url     : 'php/monitoreo/recuperarDatosPerdidos.php',
-                    method  : 'POST',
-                    waitMsg : 'Recuperando Datos...',
-                    params  :{
-                        id_est : Ext.getCmp("cbxRecuperarDatos").getValue()
-                    },
-                    failure : function (form, action) {
-                        Ext.MessageBox.show({
-                            title   : 'Error...',
-                            msg     : 'No se pudo recuperar datos...',
-                            buttons : Ext.MessageBox.OK,
-                            icon    : Ext.MessageBox.ERROR
-                        });
-                    },
-                    success: function (form, action) {
-                        winRecuperarDatosPerdidos.hide();
-                        Ext.MessageBox.show({
-                            title   : 'Exito...',
-                            msg     : 'Enviado el comando de recuperaci\xF3n...',
-                            buttons : Ext.MessageBox.OK,
-                            icon    : Ext.MessageBox.INFO
-                        });
-                    }
-                });  
-                
+                Ext.MessageBox.confirm('Confirmar', 'Esta seguro que desea recuperar esos datos?', 
+                    recuperarDatos
+                    );
             }
         }]
     });
@@ -114,6 +90,39 @@ Ext.onReady(function(){
     });
 
 });
+
+function recuperarDatos(btn){
+    if(btn=='yes'){
+        formRecuperarDatosPerdidos.getForm().submit({
+            url     : 'php/monitoreo/recuperarDatosPerdidos.php',
+            method  : 'POST',
+            waitMsg : 'Recuperando Datos...',
+            params  :{
+                id_est : Ext.getCmp("cbxRecuperarDatos").getValue()
+            },
+            failure : function (form, action) {
+                Ext.MessageBox.show({
+                    title   : 'Error...',
+                    msg     : 'No se pudo recuperar datos...',
+                    buttons : Ext.MessageBox.OK,
+                    icon    : Ext.MessageBox.ERROR
+                });
+            },
+            success: function (form, action) {
+                winRecuperarDatosPerdidos.hide();
+                Ext.MessageBox.show({
+                    title   : 'Exito...',
+                    msg     : 'Enviado el comando de recuperaci\xF3n...',
+                    buttons : Ext.MessageBox.OK,
+                    icon    : Ext.MessageBox.INFO
+                });
+            }
+        });
+        Ext.example.msg('Comando', 'Comando enviado al equipo...');
+    }else{
+        winRecuperarDatosPerdidos.hide();
+    }
+}
 
 /**
  * Limpia los campos para salir de la ventana
