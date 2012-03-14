@@ -1,5 +1,5 @@
 /* 
- * Permite desplegar la ventana para ingresar las configuraciones
+ * Permite desplegar la ventana para el borrado de estaciones
  */
 
 var winEliminarEstacion;
@@ -36,16 +36,7 @@ Ext.onReady(function(){
         resizable   : true,
         minListWidth: 300,
         selectOnFocus:true,
-        anchor      : '98%',
-        listeners:{
-            select: function(cmb,record,index){
-            //            nUnidadGen = record.get('id');
-            //            nUnidadAsig = record.get('id');
-            //            nUnidad = record.get('id');
-            //            nameVh = record.get('name');
-            //                console.info(record.get('id'));
-            }
-        }
+        anchor      : '98%'
     });
     
     formEliminarEstacion = new Ext.FormPanel({

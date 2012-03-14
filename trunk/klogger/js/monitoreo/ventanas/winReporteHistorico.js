@@ -1,5 +1,5 @@
 /* 
- * Permite desplegar la ventana para ingresar las configuraciones
+ * Permite desplegar la ventana para hacer la busqueda de un reporte
  */
 
 var winResporteHistorico;
@@ -38,7 +38,6 @@ Ext.onReady(function(){
         format: 'Y-m-d', //YYYY-MMM-DD
         id: 'fechaIniHistorico',
         name: 'strFechaIniRepHistorico',
-        //        width:140,
         allowBlank:false,
         vtype: 'daterange',
         endDateField: 'fechaFinHistorico',
@@ -52,7 +51,6 @@ Ext.onReady(function(){
         format: 'Y-m-d', //YYYY-MMM-DD
         id: 'fechaFinHistorico',
         name: 'strFechaFinRepHistorico',
-        //        width:140,
         allowBlank:false,
         vtype: 'daterange',
         startDateField: 'fechaIniHistorico',
@@ -89,16 +87,7 @@ Ext.onReady(function(){
         resizable   : true,
         minListWidth: 300,
         selectOnFocus:true,
-        anchor      : '98%',
-        listeners:{
-            select: function(cmb,record,index){
-            //            nUnidadGen = record.get('id');
-            //            nUnidadAsig = record.get('id');
-            //            nUnidad = record.get('id');
-            //            nameVh = record.get('name');
-            //                console.info(record.get('id'));
-            }
-        }
+        anchor      : '98%'
     });
 
     formReporteHistorico = new Ext.FormPanel({
@@ -179,7 +168,7 @@ function limpiarVentana(){
 }
 
 /**
- * Muestra la ventana para CONFIGURAR EL TIEMPO DE REPORTE
+ * Muestra la ventana para buscar un historico de datos
  * @return NO retorna valor
  */
 function ventanaReporteHistorico(){
