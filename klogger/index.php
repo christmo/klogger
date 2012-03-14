@@ -55,7 +55,7 @@
 
     <body>
         <center>
-            <div id ="imgPortada"><img src="img/portada.png" alt="Kradac"/>
+            <div id ="imgPortada"><img src="img/logo.jpg" alt="Kradac"/>
             </div>
 
 

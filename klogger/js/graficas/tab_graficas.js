@@ -62,6 +62,9 @@ function actualizarGraficas(){
     , 30*1000);
 }
 
+/**
+ * Actualiza el estor cada cierto tiempo con los ultimos datos
+ */
 function actualizarStoresGraficas(id_var){
     var store = Ext.StoreMgr.lookup('store'+id_var);
     store.proxy.conn.url = './php/monitoreo/graficas/getMediciones.php?id_var='+id_var+'&id_est='+id_est;

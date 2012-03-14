@@ -1,5 +1,5 @@
 /* 
- * Permite desplegar la ventana para ingresar las configuraciones
+ * Permite desplegar la ventana para ingresar una nueva estacion
  */
 
 var winNuevaEstacion;
@@ -121,7 +121,7 @@ function limpiarVentana(){
 }
 
 /**
- * Muestra la ventana para CONFIGURAR EL TIEMPO DE REPORTE
+ * Muestra la ventana para ingreso de una nueva estación
  * @return NO retorna valor
  */
 function ventanaNuevaEstacion(){
