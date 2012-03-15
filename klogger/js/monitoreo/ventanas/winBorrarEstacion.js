@@ -5,10 +5,11 @@
 var winEliminarEstacion;
 var panelEliminarEstacion;
 var formEliminarEstacion;
+var storeEstaciones;
 
 Ext.onReady(function(){
 
-  var storeEstaciones = new Ext.data.JsonStore({
+    storeEstaciones = new Ext.data.JsonStore({
         url:'php/monitoreo/combos/cbxEstaciones.php',
         root: 'estaciones',
         fields: [{
@@ -17,7 +18,6 @@ Ext.onReady(function(){
             name:'name'
         }]
     });
-    storeEstaciones.load();
     
     var cbxBorrarEstaciones = new Ext.form.ComboBox({
         fieldLabel  : 'Estaciones',
@@ -49,7 +49,7 @@ Ext.onReady(function(){
             layout  : 'form',
             defaultType: 'textfield',
             items: [
-                cbxBorrarEstaciones
+            cbxBorrarEstaciones
             ]
         }],
 
@@ -81,6 +81,8 @@ Ext.onReady(function(){
                             buttons : Ext.MessageBox.OK,
                             icon    : Ext.MessageBox.INFO
                         });
+//                        Ext.getCmp('west-panel').getLoader().dataUrl = 'php/monitoreo/getEstaciones.php';
+                        Ext.getCmp('west-panel').getRootNode().reload();
                     }
                 });  
                 
@@ -131,4 +133,6 @@ function ventanaBorrarEstacion(){
     }
     formEliminarEstacion.getForm().reset();
     winEliminarEstacion.show(this);
+    
+    storeEstaciones.load();
 }

@@ -7,10 +7,11 @@
 var winRecuperarDatosPerdidos;
 var panelRecuperarDatosPerdidos;
 var formRecuperarDatosPerdidos;
+var storeEstacionesRD;
 
 Ext.onReady(function(){
 
-    var storeEstacionesRD = new Ext.data.JsonStore({
+    storeEstacionesRD = new Ext.data.JsonStore({
         url:'php/monitoreo/combos/cbxEstaciones.php',
         root: 'estaciones',
         fields: [{
@@ -19,7 +20,7 @@ Ext.onReady(function(){
             name:'name'
         }]
     });
-    storeEstacionesRD.load();
+    
     
     var cbxEstacionesRD = new Ext.form.ComboBox({
         fieldLabel  : 'Estaciones',
@@ -156,4 +157,5 @@ function ventanaRecuperarDatos(){
     }
     formRecuperarDatosPerdidos.getForm().reset();
     winRecuperarDatosPerdidos.show(this);
+    storeEstacionesRD.load();
 }

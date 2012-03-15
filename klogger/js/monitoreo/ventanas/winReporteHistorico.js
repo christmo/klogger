@@ -5,6 +5,7 @@
 var winResporteHistorico;
 var panelReporteHistorico;
 var formReporteHistorico;
+var storeEstaciones;
 
 Ext.onReady(function(){
 
@@ -59,7 +60,7 @@ Ext.onReady(function(){
 
     });
  
-    var storeEstaciones = new Ext.data.JsonStore({
+    storeEstaciones = new Ext.data.JsonStore({
         url:'php/monitoreo/combos/cbxEstaciones.php',
         root: 'estaciones',
         fields: [{
@@ -68,7 +69,7 @@ Ext.onReady(function(){
             name:'name'
         }]
     });
-    storeEstaciones.load();
+    
     
     var cbxEstaciones = new Ext.form.ComboBox({
         fieldLabel  : 'Estaciones',
@@ -187,4 +188,5 @@ function ventanaReporteHistorico(){
     }
     formReporteHistorico.getForm().reset();
     winResporteHistorico.show(this);
+    storeEstaciones.load();
 }

@@ -17,7 +17,8 @@ $consultaSql = "
         RESPONSABLE_EST, 
         RESPONSABLE_CONT_EST,
         LON_EST,
-        LAT_EST
+        LAT_EST,
+        ALARMA
     FROM estaciones
     WHERE ID_EST IN (
       SELECT ID_EST FROM usuario_estacion WHERE ID_US=" . $_SESSION["ID_USER"] . "
@@ -39,7 +40,8 @@ for ($i = 0; $i < count($resulset); $i++) {
             $fila["RESPONSABLE_EST"] . "%" .
             $fila["RESPONSABLE_CONT_EST"] . "%" .
             $fila["NOMBRE_EST"] . "%" .
-            $fila["DIRECCION_EST"] . "#";
+            $fila["DIRECCION_EST"] . "%" .
+            $fila["ALARMA"] . "#";
 
 //    if ($fila["FECHA_INSTALACION_EST"] > $mayor) {
 //        $mayor = $fila["FECHA_INSTALACION_EST"];
