@@ -20,7 +20,7 @@ var lienzoRecorridos;
 var lienzoGeoCercas;
 
 //Lienzos por Cooperativa
-var CAR_Layer;
+var estacion_layer;
 var iconFlecha;
 var time;
 var distanciaKM;
@@ -108,11 +108,11 @@ echo " var styleLienzo = new OpenLayers.StyleMap( {
 
 
     /* CREAR LIENZOS */
-    CAR_Layer = new OpenLayers.Layer.Vector( 'Mis Estaciones', {
+    estacion_layer = new OpenLayers.Layer.Vector( 'Mis Estaciones', {
         styleMap : styleLienzo
     }
     );
-    CAR_Layer.id = 'CAR_Layer';
+    estacion_layer.id = 'estacion_layer';
 
     iconFlecha = new OpenLayers.Layer.Vector( 'Flecha', {styleMap : styleIndicador});
 
@@ -137,7 +137,7 @@ echo " var styleLienzo = new OpenLayers.StyleMap( {
     });
 
     map.addLayers([mapnik, gmap]);
-    map.addLayer( CAR_Layer );
+    map.addLayer( estacion_layer );
     map.addLayer(lienzoRecorridos);
     map.addLayer(lienzoPuntos);
     map.addLayer(markerInicioFin);
@@ -146,9 +146,9 @@ echo " var styleLienzo = new OpenLayers.StyleMap( {
 
     /* AÑADIR Y ACTIVAR EVENTOS */
 
-    CAR_Layer.setVisibility(true);
+    estacion_layer.setVisibility(true);
     selectFeatures = new OpenLayers.Control.SelectFeature(
-        [ lienzoPuntos, CAR_Layer ],
+        [ lienzoPuntos, estacion_layer ],
         {
             clickout: true,
             toggle: false,
@@ -159,7 +159,7 @@ echo " var styleLienzo = new OpenLayers.StyleMap( {
                 if (lPoint.length>0) {
                     onPuntoSelect(feature );
                 }else{
-                    onVehiculoSelect( feature );
+                    onEstacionSelect( feature );
                 }
             },
             onUnselect : function(feature){
@@ -329,13 +329,13 @@ function coordenadas(){
  * Cantidad de Elementos dentro del Vector
  */
 function cantElementos(){
-    return CAR_Layer.features.length;
+    return estacion_layer.features.length;
 }
 
 //Verifica si la capa está activa
 
 function estaActivo(){
-    return CAR_Layer.getVisibility();
+    return estacion_layer.getVisibility();
 }
 
 //grafica las unidades
@@ -368,9 +368,9 @@ function graficarVehiculos2(cordGrap){
         var estFeature = null;
 
         //Extracción dependiendo del Layer
-        estFeature = CAR_Layer.getFeatureById( idtaxiBD );
+        estFeature = estacion_layer.getFeatureById( idtaxiBD );
 
-        //CREA UN NUEVO ELEMENTO PARA EL TAXI PORQUE NO EXISTE
+        //CREA UN NUEVO ELEMENTO PARA LA ESTACION PORQUE NO EXISTE
         if ( estFeature == null ){
 
             // Coordenadas
@@ -403,7 +403,7 @@ function graficarVehiculos2(cordGrap){
             estFeature.id = 'T' + columnas[0];
 
             //Se añade a la capa que corresponda
-            CAR_Layer.addFeatures( [estFeature] );
+            estacion_layer.addFeatures( [estFeature] );
         }else{
                 var poppedup
                 if (estFeature == null){
@@ -435,6 +435,15 @@ function graficarVehiculos2(cordGrap){
                     selectControl.select( estFeature );
                 }
         } //FIN DE ELSE DEL OBJETO NULO
+        
+        /**
+         * Cambiar el icono por el de alarma
+         */
+        if(columnas[8]==1){
+            estFeature.attributes.img='img/temperatura_r.png';
+        }else{
+            estFeature.attributes.img='img/temperatura.png';
+        }
     }
 }
 
@@ -583,7 +592,7 @@ function redondear(num, dec){
 
 function buscarVehiculo(numVeh){
 
-    var lienzoB = map.getLayer('CAR_Layer');
+    var lienzoB = map.getLayer('estacion_layer');
 
     if (lienzoB == null){
         Ext.MessageBox.show({
@@ -720,7 +729,7 @@ function onPuntoSelect( feature ) {
 }
 
 //Acciones Vehiculos
-function onVehiculoSelect( feature ) {
+function onEstacionSelect( feature ) {
 
     var id_est = feature.attributes.id_est;
     var fec_inst = feature.attributes.fec_inst;
@@ -744,7 +753,7 @@ function onVehiculoSelect( feature ) {
             + nomb_est + '</div><b><BR/> Dirección:  </b> <div style=\'padding:0px 0px 0px 15px\'>'
             + dir_est + '</div><b><BR/> Responsable: </b> <div style=\'padding:0px 0px 0px 15px\'>'
             + resp + '</div><b> <BR/> Contacto: </b> '
-            + contacto + ' <b> <BR/> Fecha Inst: </b> <div style=\'padding:0px 0px 0px 15px\'>' + fec_inst +  '</div><br/><center><b><a href=\"javascript:agregarTab(\'Tiempo Real\','+id_est+');\">".utf8_encode("Ver Gr\xE1ficos")."</a></b></center></div>'
+            + contacto + ' <b> <BR/> Fecha Inst: </b> <div style=\'padding:0px 0px 0px 15px\'>' + fec_inst +  '</div><br/><center><b><a href=\"javascript:agregarTab(\'Tiempo Real\','+id_est+');\">" . utf8_encode("Ver Gr\xE1ficos") . "</a></b></center></div>'
         ,
         null, true,  function () {
             onVehiculoClose( feature )

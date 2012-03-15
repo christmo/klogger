@@ -90,6 +90,9 @@ Ext.onReady(function(){
                             buttons : Ext.MessageBox.OK,
                             icon    : Ext.MessageBox.INFO
                         });
+
+//                        Ext.getCmp('west-panel').getLoader().dataUrl = 'php/monitoreo/getEstaciones.php';
+                        Ext.getCmp('west-panel').getRootNode().reload();
                     }
                 });  
                 
