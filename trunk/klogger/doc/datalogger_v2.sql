@@ -285,6 +285,7 @@ CREATE TABLE `estaciones` (
   `LON_EST` double DEFAULT NULL,
   `LAT_EST` double DEFAULT NULL,
   `ALTITUD` double NOT NULL,
+  `ALARMA` tinyint(1) DEFAULT '0' COMMENT 'Actualiza a 1 si se despliega una alarma para cambiar el icono',
   PRIMARY KEY (`ID_EST`),
   UNIQUE KEY `IDEQUIPO_EST_UNIQUE` (`IDEQUIPO_EST`),
   UNIQUE KEY `ID_EST_UNIQUE` (`ID_EST`)
