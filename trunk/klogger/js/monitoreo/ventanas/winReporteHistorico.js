@@ -5,7 +5,7 @@
 var winResporteHistorico;
 var panelReporteHistorico;
 var formReporteHistorico;
-var storeEstaciones;
+var storeEstacionesH;
 
 Ext.onReady(function(){
 
@@ -60,7 +60,7 @@ Ext.onReady(function(){
 
     });
  
-    storeEstaciones = new Ext.data.JsonStore({
+    storeEstacionesH = new Ext.data.JsonStore({
         url:'php/monitoreo/combos/cbxEstaciones.php',
         root: 'estaciones',
         fields: [{
@@ -71,11 +71,11 @@ Ext.onReady(function(){
     });
     
     
-    var cbxEstaciones = new Ext.form.ComboBox({
+    var cbxEstacionesH = new Ext.form.ComboBox({
         fieldLabel  : 'Estaciones',
-        id          : 'cbxEstaciones',
-        name        : 'cbxEstaciones',
-        store       : storeEstaciones,
+        id          : 'cbxEstacionesH',
+        name        : 'cbxEstacionesH',
+        store       : storeEstacionesH,
         hiddenName  : 'idEstacion',
         valueField  : 'id',
         displayField: 'name',
@@ -101,7 +101,7 @@ Ext.onReady(function(){
             layout      : 'form',
             defaultType : 'textfield',
             items: [
-            cbxEstaciones, 
+            cbxEstacionesH,
             fechaIniRepHistorico,
             new Ext.form.TimeField({
                 fieldLabel  : 'Desde la hora',
@@ -134,7 +134,7 @@ Ext.onReady(function(){
             id      : 'btnBuscarHistorico',
             handler: function() {
                 agregarTabHistorico(
-                    formReporteHistorico.getForm().findField('cbxEstaciones').getValue(),
+                    formReporteHistorico.getForm().findField('cbxEstacionesH').getValue(),
                     Ext.getCmp('fechaIniHistorico').value,
                     formReporteHistorico.getForm().findField('strHoraIni').getValue(),
                     Ext.getCmp('fechaFinHistorico').value,
@@ -188,5 +188,5 @@ function ventanaReporteHistorico(){
     }
     formReporteHistorico.getForm().reset();
     winResporteHistorico.show(this);
-    storeEstaciones.load();
+    storeEstacionesH.load();
 }

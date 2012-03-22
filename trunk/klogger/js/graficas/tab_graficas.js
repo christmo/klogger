@@ -296,14 +296,11 @@ function changeImage(id){
         img.dom.alt = 'activo';
     } 
     
-    var codBinario=1;
+    var codBinario=2;
     var suma=0;
     for(var i=1; i<=6; i++){
         var out = Ext.get("out"+i).dom.alt;
         codBinario = codBinario*2;
-        if(i==1){
-            codBinario--;    
-        }
         if(out=='activo'){
             suma += codBinario
         }
